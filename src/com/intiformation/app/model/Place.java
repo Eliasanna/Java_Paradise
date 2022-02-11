@@ -2,7 +2,7 @@ package com.intiformation.app.model;
 
 import java.io.Serializable;
 
-public class Place  implements Serializable {
+public class Place  implements Serializable  {
 
     private long id;
     private String name;

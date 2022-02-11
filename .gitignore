@@ -3,3 +3,11 @@
 /.idea/misc.xml
 /.idea/modules.xml
 /.idea/project-template.xml
+/out/production/Java_Paradise/com/intiformation/app/util/ConnectionManager.class
+/.idea/dataSources.xml
+/out/production/Java_Paradise/com/intiformation/app/Launcher.class
+/lib/mysql-connector-java-8.0.28.jar
+/.idea/libraries/mysql_connector_java_8_0_28.xml
+/out/production/Java_Paradise/com/intiformation/app/model/Place.class
+/out/production/Java_Paradise/com/intiformation/app/model/Trip.class
+/.idea/uiDesigner.xml
