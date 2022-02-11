@@ -1,4 +1,4 @@
-package com.intiformation.app.model;
+package com.intiformation.app.dao;
 
 /**
  * (c) Patrick Brouillé
