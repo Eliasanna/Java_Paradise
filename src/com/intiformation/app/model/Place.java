@@ -1,9 +1,11 @@
 package com.intiformation.app.model;
 
+import com.intiformation.app.dao.PlaceDao;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Place implements Serializable, PlaceDao  {
+public class Place implements Serializable, PlaceDao {
 
     private long id;
     private String name;

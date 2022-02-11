@@ -1,4 +1,6 @@
-package com.intiformation.app.model;
+package com.intiformation.app.dao;
+
+import com.intiformation.app.model.Trip;
 
 import java.util.ArrayList;
 

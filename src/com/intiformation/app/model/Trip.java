@@ -1,5 +1,7 @@
 package com.intiformation.app.model;
 
+import com.intiformation.app.dao.TripDao;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
