@@ -1,4 +1,8 @@
-public class Place {
+package com.intiformation.app.model;
+
+import java.io.Serializable;
+
+public class Place  implements Serializable {
 
     private long id;
     private String name;
@@ -6,10 +10,7 @@ public class Place {
     public Place() {
     }
 
-    public Place(long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+
 
     public long getId() {
         return id;
