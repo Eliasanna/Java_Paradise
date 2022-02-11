@@ -1,5 +1,7 @@
 package com.intiformation.app.dao;
 
+import com.intiformation.app.dao.jdbc.*;
+
 /**
  * (c) Patrick Brouillé
  * User: Patrick
