@@ -16,11 +16,11 @@ public class DaoFactory {
     private DaoFactory() {
     }
 
-    public static JdbcTripDao GetTripDao() {
+    public static TripDao GetTripDao() {
          return new JdbcTripDao();
     }
 
-    public static JdbcPlaceDao GetPlaceDao() {
+    public static PlaceDao GetPlaceDao() {
         return new JdbcPlaceDao();
     }
 
