@@ -1,8 +1,13 @@
 package com.intiformation.app;
+import com.intiformation.app.dao.DaoFactory;
+import com.intiformation.app.dao.PlaceDao;
+import com.intiformation.app.dao.TripDao;
 import com.intiformation.app.model.Place;
+import com.intiformation.app.model.Trip;
 import com.intiformation.app.util.ConnectionManager;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Launcher {
@@ -40,10 +45,12 @@ public class Launcher {
                     break;
                 case 5:
                     //Add a trip
+                    addaTrip();
                     break;
 
                 case 6:
                     //Find a trip
+                    findaTrip();
                     break;
 
                 case 7:
@@ -70,13 +77,66 @@ public class Launcher {
 
     }
 
+    private static void findaTrip() {
+        System.out.println("Name of place of depature to find :");
+        String name = scan.nextLine();
+        Place place = new Place();
+        Boolean trouveplace=false;
+        Boolean boucle = false;
+        //TODO rechercher place
+        if (place!= null)//TODO place non vide
+        {
+        trouveplace=true;
+        ;}
+        else
+        { System.out.println("place non trouvée.");}
+        if(trouveplace==true){
+            System.out.println("Name of place of arival to find :");
+        }
+
+
+    }
+
+    private static void addaTrip() {
+        System.out.println("Vous désirez ajouter un voyage");
+
+
+        TripDao tripDao = DaoFactory.GetTripDao();
+        PlaceDao placeDao = DaoFactory.GetPlaceDao();
+        ArrayList<Place> places = placeDao.findAllPlace();
+        for (Place p : places ) {
+            System.out.println(p.toString());
+        }
+        System.out.println("Choice id of depature");
+        Long iddepature = scan.nextLong();
+        System.out.println("Choice id of arrival");
+        Long idarrival = scan.nextLong();
+
+        System.out.println("Price of the trip ?");
+        float price=scan.nextFloat();
+
+        Trip newTrip= new Trip();
+        newTrip.setDeparture(iddepature);
+        newTrip.setArrival(idarrival);
+        newTrip.setPrice(price);
+
+        try {
+            tripDao.createTrip(newTrip);
+            System.out.println("Le voyage à bien été ajouté");
+        } catch (Exception e) {
+            System.out.println("erreur lors de la création du voyage.");
+            e.printStackTrace();
+        }
+    }
+
     // add new Place
     private static void addaPlace() {
         System.out.println("Name of place to add :");
-        String name = scan.nextLine();
+        String name = scan.next();
         Place place = new Place();
         place.setName(name);
-        //TODO ajout en base
+        PlaceDao placeDao = DaoFactory.GetPlaceDao();
+        placeDao.createPlace(place);
         System.out.println("New place added.");
 
     }
