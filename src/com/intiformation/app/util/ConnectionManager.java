@@ -17,7 +17,7 @@ public class ConnectionManager {
 
     public static Connection getConnection() {
         if(connection==null ){
-            try (InputStream input = new FileInputStream(".env")) {
+            try (InputStream input = new FileInputStream(".environnement")) {
 
                 Properties prop = new Properties();
                 // load a properties file
