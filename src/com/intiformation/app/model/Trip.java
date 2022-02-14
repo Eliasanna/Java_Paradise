@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class Trip implements Serializable {
 
     private long id;
-    private String departure;
-    private String arrival;
+    private long departure;
+    private long arrival;
     private float price;
 
     public Trip() {
@@ -24,19 +24,19 @@ public class Trip implements Serializable {
         this.id = id;
     }
 
-    public String getDeparture() {
+    public Long getDeparture() {
         return departure;
     }
 
-    public void setDeparture(String departure) {
+    public void setDeparture(long departure) {
         this.departure = departure;
     }
 
-    public String getArrival() {
+    public Long getArrival() {
         return arrival;
     }
 
-    public void setArrival(String arrival) {
+    public void setArrival(long arrival) {
         this.arrival = arrival;
     }
 

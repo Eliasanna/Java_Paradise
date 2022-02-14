@@ -31,5 +31,11 @@ public class Place implements Serializable {
         this.name = name;
     }
 
-
+    @Override
+    public String toString() {
+        return "Place{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
