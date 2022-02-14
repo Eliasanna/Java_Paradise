@@ -25,7 +25,7 @@ public class Launcher {
             System.out.println("4 - Remove a place");
             System.out.println("5 - Add a trip");
             System.out.println("6 - Find a trip");
-            System.out.println("7 - Remoove a trip");
+            System.out.println("7 - Remove a trip");
             System.out.println("8 - Quit");
             choix=scan.nextInt();
             switch (choix){
@@ -42,6 +42,7 @@ public class Launcher {
                     break;
                 case 4:
                     //Remove a place
+                    removeaPlace();
                     break;
                 case 5:
                     //Add a trip
@@ -54,16 +55,16 @@ public class Launcher {
                     break;
 
                 case 7:
-                    //Remoove a trip
+                    //Remove a trip
+                    removeaTrip();
                     break;
                 case 8:
-                    System.out.println("Goodby !");
                     // fermeture de la connexion
+                    System.out.println("Goodby !");
                     try {
                         myConnection.close();
                     } catch (SQLException e) {
                         e.printStackTrace();
-
                     }
                     break;
                 default:
@@ -71,10 +72,7 @@ public class Launcher {
                     break;
             }
         }
-        while(choix!=8);
-
-
-
+        while(choix != 8);
     }
 
     private static void findaTrip() {
@@ -138,7 +136,6 @@ public class Launcher {
         PlaceDao placeDao = DaoFactory.GetPlaceDao();
         placeDao.createPlace(place);
         System.out.println("New place added.");
-
     }
     // find a place
 
@@ -154,6 +151,35 @@ public class Launcher {
     }
 
 
+    private static void removeaPlace() {
+        System.out.println("Name of place to be removed :");
+        String name = scan.nextLine();
+        Place place = new Place();
+        place.setName(name);
+        PlaceDao placeDao = DaoFactory.GetPlaceDao();
+        if (placeDao.removePlace(place)) {
+            System.out.println("place " + place.getName() + " found & removed");
+        } else {
+            System.out.println("place " + place.getName() + " not found.");
+        }
+    }
+
+    private static void removeaTrip() {
+        System.out.println("Please provide departure and arrival info for the Trip to be removed:");
+        System.out.println("Departure:");
+        String dep = scan.nextLine();
+        System.out.println("Arrival:");
+        String arr = scan.nextLine();
+        Trip trip = new Trip();
+        trip.setDeparture(dep);
+        trip.setArrival(arr);
+        TripDao tripDao = DaoFactory.GetTripDao();
+        if (tripDao.removeTrip(trip)) {
+            System.out.println("trip " + trip.getDeparture() + " / " + trip.getArrival() + " found & removed");
+        } else {
+            System.out.println("trip " +  trip.getDeparture() + " / " + trip.getArrival() + " not found.");
+        }
+    }
 
 
 }
