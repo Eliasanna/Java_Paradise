@@ -52,15 +52,16 @@ public class JdbcTripDao extends JdbcDao implements TripDao {
     @Override
     public boolean updateTrip(Trip trip) throws SQLException {
         Connection myConnection = ConnectionManager.getConnection();
-        String querySql = "UPDATE trip SET depature = (?), arrival = (?), price = (?),  WHERE id = (?)";
+        String querySql = "UPDATE trip SET depature = ?, arrival = ?, price = ?,  WHERE id = ?";
            Boolean bool=true;
 
         long row=0;
 
         PreparedStatement preparedStatement = myConnection.prepareStatement(querySql);
-        preparedStatement.setString(1, String.valueOf(trip.getDeparture()));
-        preparedStatement.setString(2, String.valueOf(trip.getArrival()));
-        preparedStatement.setString(3, String.valueOf(trip.getPrice()));
+
+        preparedStatement.setLong(1, trip.getDeparture());
+        preparedStatement.setLong(2, trip.getArrival());
+        preparedStatement.setFloat(3, trip.getPrice());
         preparedStatement.setString(2, String.valueOf(trip.getId()));
         row = preparedStatement.executeUpdate();
         if(row ==0)
@@ -88,7 +89,7 @@ public class JdbcTripDao extends JdbcDao implements TripDao {
     public ArrayList<Trip> findAllTrip() {
         Connection myConnection = ConnectionManager.getConnection();
         String querySql = "select * from trip";
-        long row=0;
+
         ArrayList<Trip> trips = new ArrayList<>();
         try (PreparedStatement preparedStatement = myConnection.prepareStatement(querySql)) {
 

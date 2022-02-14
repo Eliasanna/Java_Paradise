@@ -31,7 +31,7 @@ public class JdbcPlaceDao extends JdbcDao implements PlaceDao {
         String querySql = "select * from place where id =(?)";
         long row = 0;
         try (PreparedStatement preparedStatement = myConnection.prepareStatement(querySql)) {
-            preparedStatement.setString(1, String.valueOf(id));
+            preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery(querySql);
             Long idplace = resultSet.getLong("id");
             String name = resultSet.getString("name");

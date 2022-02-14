@@ -31,6 +31,7 @@ public class Launcher {
             System.out.println("7 - Remoove a trip");
             System.out.println("8 - Quit");
             choix = scan.nextInt();
+            scan.nextLine();
             switch (choix) {
                 case 1:
                     // add a place
@@ -92,6 +93,7 @@ public class Launcher {
         Long iddepature = scan.nextLong();
         System.out.println("Choice id of arrival");
         Long idarrival = scan.nextLong();
+        scan.nextLine();
 
         System.out.println("Price of the trip ?");
         float price = scan.nextFloat();
@@ -113,7 +115,8 @@ public class Launcher {
     // add new Place
     private static void addaPlace() {
         System.out.println("Name of place to add :");
-        String name = scan.next();
+
+        String name = scan.nextLine();
         Place place = new Place();
         place.setName(name);
         PlaceDao placeDao = DaoFactory.GetPlaceDao();
@@ -144,8 +147,7 @@ public class Launcher {
 
     private static Place findPlacebyName() {
         System.out.println("Name of place to find :");
-       //String name = scan.nextLine();
-        String name ="Rome";
+        String name = scan.nextLine();
         //System.out.println("Name of place to id :");
         //long id = scan.nextLong();
         Place place = new Place();
