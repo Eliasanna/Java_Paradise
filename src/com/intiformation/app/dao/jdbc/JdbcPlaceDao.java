@@ -6,18 +6,17 @@ import com.intiformation.app.util.ConnectionManager;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class JdbcPlaceDao extends JdbcDao implements PlaceDao {
     @Override
     public long createPlace(Place place) {
         Connection myConnection = ConnectionManager.getConnection();
         String querySql = "insert into place (name) Values(?)";
-        long row=0;
+        long row = 0;
         try (
-            PreparedStatement preparedStatement = myConnection.prepareStatement(querySql)) {
+                PreparedStatement preparedStatement = myConnection.prepareStatement(querySql)) {
             preparedStatement.setString(1, place.getName());
-           // ResultSet resultSet = preparedStatement.executeQuery();
+            // ResultSet resultSet = preparedStatement.executeQuery();
             row = preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -27,40 +26,41 @@ public class JdbcPlaceDao extends JdbcDao implements PlaceDao {
 
     @Override
     public Place findPlaceById(Long id) {
-        Connection myConnection = ConnectionManager.getConnection();
-        String querySql = "select * from place where id =(?)";
-        long row=0;
-        try (PreparedStatement preparedStatement = myConnection.prepareStatement(querySql)) {
-            preparedStatement.setString(1, String.valueOf(id));
-            ResultSet resultSet = preparedStatement.executeQuery(querySql);
-                Long idplace = resultSet.getLong("id");
-                String name = resultSet.getString("name");
 
-                Place place = new Place();
-                place.setId(idplace);
-                place.setName(name);
+        Connection myConnection = ConnectionManager.getConnection();
+        String querySql = "select * from place where id = ?";
+        try (PreparedStatement preparedStatement = myConnection.prepareStatement(querySql)) {
+            preparedStatement.setLong(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery(querySql);
+            long idplace = resultSet.getLong("id");
+            String name = resultSet.getString("name");
+
+            Place place = new Place();
+            place.setId(idplace);
+            place.setName(name);
+            return place;
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return new Place();
     }
 
     @Override
     public boolean updatePlace(Place place) {
         Connection myConnection = ConnectionManager.getConnection();
-        String querySql = "UPDATE place SET name = (?) WHERE id = (?)";
-        Boolean bool=true;
+        String querySql = "UPDATE place SET name = ? WHERE id = ?";
+        boolean bool = true;
 
-        long row=0;
         try (
                 PreparedStatement preparedStatement = myConnection.prepareStatement(querySql)) {
             preparedStatement.setString(1, place.getName());
-            preparedStatement.setString(2, String.valueOf(place.getId()));
+            preparedStatement.setLong(2,  place.getId());
             // ResultSet resultSet = preparedStatement.executeQuery();
-            row = preparedStatement.executeUpdate();
-            if(row ==0)
-            { bool=false;}
+            long row = preparedStatement.executeUpdate();
+            if (row == 0) {
+                bool = false;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -70,18 +70,18 @@ public class JdbcPlaceDao extends JdbcDao implements PlaceDao {
     @Override
     public boolean removePlace(Place place) {
         Connection myConnection = ConnectionManager.getConnection();
-        String querySql = "delete from WHERE id = (?)";
-        Boolean bool=true;
+        String querySql = "delete from place WHERE id = ?";
+        boolean bool = true;
 
-        long row=0;
-        try (
-                PreparedStatement preparedStatement = myConnection.prepareStatement(querySql)) {
+        try (PreparedStatement preparedStatement = myConnection.prepareStatement(querySql)) {
 
-            preparedStatement.setString(1, String.valueOf(place.getId()));
+            preparedStatement.setLong(1, place.getId());
+            System.out.println(preparedStatement);
             // ResultSet resultSet = preparedStatement.executeQuery();
-            row = preparedStatement.executeUpdate();
-            if(row ==0)
-            { bool=false;}
+            long row = preparedStatement.executeUpdate();
+            if (row == 0) {
+                bool = false;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -92,14 +92,13 @@ public class JdbcPlaceDao extends JdbcDao implements PlaceDao {
     public ArrayList<Place> findAllPlace() {
         Connection myConnection = ConnectionManager.getConnection();
         String querySql = "select * from place";
-        long row=0;
         ArrayList<Place> places = new ArrayList<>();
         try (PreparedStatement preparedStatement = myConnection.prepareStatement(querySql)) {
 
             ResultSet resultSet = preparedStatement.executeQuery(querySql);
 
             while (resultSet.next()) {
-                Long id = resultSet.getLong("id");
+                long id = resultSet.getLong("id");
                 String name = resultSet.getString("name");
 
                 Place p = new Place();
